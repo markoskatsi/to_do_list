@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import '../css/TaskCard.css'
+import '../css/TaskCard.css';
+import { FiEdit2, FiTrash2 } from 'react-icons/fi';
 
 function TaskCard({ aim, isChecked, onDelete, onChecked, onEdit }) {
   const [isEditing, setIsEditing] = useState(false);
@@ -27,6 +28,7 @@ function TaskCard({ aim, isChecked, onDelete, onChecked, onEdit }) {
           value={editedAim}
           onChange={(e) => setEditedAim(e.target.value)}
           className="task-aim-edit"
+          autoFocus
         />
       ) : (
         <div className={`task-aim ${isChecked ? 'line-through' : ''}`}>
@@ -35,15 +37,16 @@ function TaskCard({ aim, isChecked, onDelete, onChecked, onEdit }) {
       )}
 
       <div className="task-buttons">
-        <button className="edit-button" onClick={handleEdit}>
-          {isEditing ? "Save" : "Edit"}
+        <button className={`edit-button ${isEditing ? 'save-button' : ''}`} onClick={handleEdit}>
+          {isEditing ? (
+            "Save"
+          ) : (
+            <FiEdit2 size={18} />
+          )}
         </button>
 
-        <button 
-          className="delete-button"
-          onClick={onDelete} 
-        >
-          Delete
+        <button className="delete-button" onClick={onDelete}>
+          <FiTrash2 size={18} />
         </button>
       </div>
     </div>
